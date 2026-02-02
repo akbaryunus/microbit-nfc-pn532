@@ -84,11 +84,20 @@ namespace NFC {
         init = true;
     }
 
-    //% weight=90
-    //% blockId="nfcEvent" block="When RFID card is detected"
-    export function nfcEvent(tempAct: Action) {
-        myNFCevent = tempAct;
-    }
+//% weight=90
+//% blockId="nfcEvent" block="When RFID card is detected"
+export function nfcEvent(tempAct: Action) {
+    myNFCevent = tempAct;
+}
+
+/**
+ * Debug print to USB console (works even when UART is redirected to PN532)
+ */
+//% block="debug log %text"
+//% weight=10
+export function debugLog(text: string): void {
+    console.log(text)
+}
 
     // ---------- Helpers (robust PN532 parsing) ----------
 
@@ -204,15 +213,6 @@ namespace NFC {
         let uidArr = parseUIDFromInListPassiveTarget(resp);
         return uidArr.length > 0;
     }
-
-    /**
- * Debug print to USB console (works even when UART is redirected to PN532)
- */
-//% block="debug log %text"
-//% weight=10
-export function debugLog(text: string): void {
-    console.log(text)
-}
 
     // ---------- Background polling ----------
 
