@@ -91,12 +91,25 @@ export function nfcEvent(tempAct: Action) {
 }
 
 /**
- * Debug print to USB console (works even when UART is redirected to PN532)
+ * Temporarily stop NFC polling, print to USB serial, then reconnect NFC UART.
  */
-//% block="debug log %text"
-//% weight=10
-export function debugLog(text: string): void {
-    console.log(text)
+//% block="USB serial print %text"
+//% weight=9
+export function usbSerialPrint(text: string): void {
+    // Stop the background poll loop from firing while we swap serial
+    init = false
+
+    // Switch serial back to USB so serial.writeString/writeLine goes to PC
+    serial.redirectToUSB()
+
+    // Print to PC
+    serial.writeLine(text)
+
+    // Switch UART back to PN532 pins
+    serial.redirect(myRxPin, myTxPin, BaudRate.BaudRate115200)
+
+    // Resume polling
+    init = true
 }
 
     // ---------- Helpers (robust PN532 parsing) ----------
