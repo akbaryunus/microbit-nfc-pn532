@@ -205,6 +205,15 @@ namespace NFC {
         return uidArr.length > 0;
     }
 
+    /**
+ * Debug print to USB console (works even when UART is redirected to PN532)
+ */
+//% block="debug log %text"
+//% weight=10
+export function debugLog(text: string): void {
+    console.log(text)
+}
+
     // ---------- Background polling ----------
 
     basic.forever(() => {
