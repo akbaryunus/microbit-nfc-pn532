@@ -1,0 +1,14 @@
+{
+  "name": "NFC",
+  "version": "0.0.1",
+  "description": "micro:bit NFC extension for DFRobot PN532 (DFR0231-H), ISO14443A / MIFARE Ultralight via UART",
+  "license": "MIT",
+  "dependencies": {
+    "core": "*"
+  },
+  "files": [
+    "main.ts",
+    "main.cpp"
+  ],
+  "public": true
+}
